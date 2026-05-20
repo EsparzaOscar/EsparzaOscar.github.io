@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Oscar Esparza — Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:#070C18; --surface:#0C1322; --card:#101928; --card2:#131F30;
+  --border:#1A2A40; --border2:#223250;
+  --teal:#00D4AA; --teal2:#00BFFF; --teal-dim:rgba(0,212,170,0.1);
+  --orange:#FF7A3D; --gold:#F5C842;
+  --text:#C8D6EC; --muted:#526070; --white:#EEF2FA;
+  --mono:'JetBrains Mono',monospace; --body:'Outfit',sans-serif; --head:'Archivo Black',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-weight:400;line-height:1.65;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(26,42,64,0.45) 1px,transparent 1px),linear-gradient(90deg,rgba(26,42,64,0.45) 1px,transparent 1px);background-size:64px 64px;pointer-events:none;z-index:0}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:16px 52px;background:rgba(7,12,24,0.9);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);transition:padding .3s}
+.nav-logo{font-family:var(--mono);font-size:13px;color:var(--teal);letter-spacing:.06em}
+.nav-logo em{color:var(--muted);font-style:normal}
+nav ul{display:flex;gap:28px;list-style:none;align-items:center}
+nav ul a{font-family:var(--mono);font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:.12em;text-transform:uppercase;transition:color .2s}
+nav ul a:hover,nav ul a.active{color:var(--teal)}
+.nav-cta{padding:7px 18px;border:1px solid var(--teal);color:var(--teal)!important;border-radius:2px;transition:background .2s!important}
+.nav-cta:hover{background:var(--teal-dim)!important}
+/* HERO */
+#hero{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;padding:140px 52px 80px}
+.hero-grid{display:grid;grid-template-columns:1fr 400px;gap:56px;align-items:center;max-width:1200px;width:100%}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;color:var(--teal);letter-spacing:.14em;text-transform:uppercase;padding:6px 14px;border:1px solid rgba(0,212,170,.4);border-radius:2px;margin-bottom:28px;opacity:0;animation:fadeUp .5s .1s forwards}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--teal);animation:blink 1.8s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+h1{font-family:var(--head);font-size:clamp(52px,8vw,90px);line-height:.93;color:var(--white);letter-spacing:-.02em;margin-bottom:20px;opacity:0;animation:fadeUp .6s .25s forwards}
+h1 .t{color:var(--teal)}
+.hero-sub-title{font-family:var(--mono);font-size:12px;color:var(--teal);letter-spacing:.08em;margin-bottom:18px;opacity:0;animation:fadeUp .6s .38s forwards}
+.hero-sub{font-size:15px;color:var(--text);max-width:530px;line-height:1.78;margin-bottom:32px;opacity:0;animation:fadeUp .6s .5s forwards}
+.hero-langs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;opacity:0;animation:fadeUp .6s .62s forwards}
+.lang-pill{font-family:var(--mono);font-size:10px;padding:4px 12px;border-radius:20px;letter-spacing:.06em}
+.lp-n{background:rgba(0,212,170,.12);color:var(--teal);border:1px solid rgba(0,212,170,.3)}
+.lp-p{background:rgba(0,191,255,.1);color:var(--teal2);border:1px solid rgba(0,191,255,.25)}
+.lp-e{background:rgba(245,200,66,.1);color:var(--gold);border:1px solid rgba(245,200,66,.25)}
+.hero-cta{display:flex;gap:10px;flex-wrap:wrap;opacity:0;animation:fadeUp .6s .75s forwards}
+.btn{display:inline-block;text-decoration:none;border-radius:2px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;transition:all .2s;padding:12px 26px}
+.btn-p{background:var(--teal);color:#07111C;font-weight:500}
+.btn-p:hover{background:#fff;transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,212,170,.25)}
+.btn-o{border:1px solid var(--border2);color:var(--text)}
+.btn-o:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-2px)}
+/* TERMINAL */
+.hero-terminal{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;opacity:0;animation:fadeUp .8s .9s forwards;box-shadow:0 32px 80px rgba(0,0,0,.5)}
+.term-bar{display:flex;align-items:center;gap:6px;padding:10px 16px;background:var(--surface);border-bottom:1px solid var(--border)}
+.td2{width:10px;height:10px;border-radius:50%}
+.term-body{padding:18px 20px;font-family:var(--mono);font-size:11.5px;line-height:2}
+.tc{color:var(--teal)}.to{color:var(--orange)}.tg{color:var(--gold)}.tm{color:var(--muted)}.tw{color:var(--white)}
+/* IMPACT */
+#impact{position:relative;z-index:1;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:32px 52px}
+.impact-row{display:flex;justify-content:space-around;flex-wrap:wrap;gap:20px;max-width:1200px;margin:0 auto}
+.impact-item{text-align:center}
+.impact-num{font-family:var(--head);font-size:32px;color:var(--teal);line-height:1;margin-bottom:5px}
+.impact-label{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+/* WRAP */
+.wrap{max-width:1200px;margin:0 auto;padding:88px 52px;position:relative;z-index:1}
+.eyebrow{font-family:var(--mono);font-size:10px;color:var(--teal);letter-spacing:.22em;text-transform:uppercase;margin-bottom:10px}
+.sec-h{font-family:var(--head);font-size:clamp(26px,4vw,40px);color:var(--white);margin-bottom:48px;line-height:1.1}
+.ruled{border:none;border-top:1px solid var(--border);margin:0 0 48px}
+/* SKILLS */
+.skills-cols{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.skgroup{font-family:var(--mono);font-size:10px;color:var(--teal);letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.sk-row{margin-bottom:13px}
+.sk-meta{display:flex;justify-content:space-between;margin-bottom:5px}
+.sk-name{font-size:13px;color:var(--white)}
+.sk-pct{font-family:var(--mono);font-size:11px;color:var(--teal)}
+.bar{height:3px;background:var(--border);border-radius:2px}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--teal2));border-radius:2px;width:0;transition:width 1.3s cubic-bezier(.4,0,.2,1)}
+.soft-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
+.soft-chip{font-family:var(--mono);font-size:10px;padding:5px 11px;border:1px solid var(--border);border-radius:2px;color:var(--text);background:var(--card);transition:border-color .2s,color .2s}
+.soft-chip:hover{border-color:var(--teal);color:var(--teal)}
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+.proj-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:26px 24px;transition:border-color .25s,transform .25s,box-shadow .25s;position:relative;overflow:hidden}
+.proj-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),var(--teal2),transparent);opacity:0;transition:opacity .25s}
+.proj-card:hover{border-color:rgba(0,212,170,.35);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.45)}
+.proj-card:hover::before{opacity:1}
+.proj-num{font-family:var(--mono);font-size:10px;color:var(--teal);margin-bottom:12px;letter-spacing:.12em}
+.proj-title{font-size:14px;font-weight:600;color:var(--white);margin-bottom:10px;line-height:1.35}
+.proj-desc{font-size:13px;color:var(--muted);line-height:1.72;margin-bottom:16px}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-family:var(--mono);font-size:10px;padding:3px 8px;background:rgba(0,212,170,.06);border:1px solid rgba(0,212,170,.2);border-radius:2px;color:var(--teal);letter-spacing:.04em}
+.tag.py{background:rgba(0,191,255,.06);border-color:rgba(0,191,255,.2);color:var(--teal2)}
+/* PUBLICATIONS */
+.pub-list{display:flex;flex-direction:column;gap:14px}
+.pub-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;transition:border-color .2s,transform .2s}
+.pub-card:hover{border-color:rgba(0,212,170,.3);transform:translateX(4px)}
+.pub-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.pub-title{font-size:13px;font-weight:600;color:var(--white);margin-bottom:4px;line-height:1.4}
+.pub-meta{font-family:var(--mono);font-size:10px;color:var(--muted)}
+.pub-type{display:inline-block;font-family:var(--mono);font-size:9px;padding:2px 7px;border-radius:2px;margin-left:7px;vertical-align:middle}
+.pt-a{background:rgba(0,212,170,.1);color:var(--teal);border:1px solid rgba(0,212,170,.25)}
+.pt-b{background:rgba(245,200,66,.1);color:var(--gold);border:1px solid rgba(245,200,66,.25)}
+/* TIMELINE */
+.timeline{position:relative;padding-left:28px}
+.timeline::before{content:'';position:absolute;left:0;top:6px;bottom:60px;width:1px;background:linear-gradient(180deg,var(--teal) 0%,rgba(0,212,170,.08) 100%)}
+.tl-item{position:relative;margin-bottom:44px}
+.tl-dot{position:absolute;left:-35px;top:5px;width:13px;height:13px;border-radius:50%;border:2px solid var(--border2);background:var(--bg);transition:border-color .3s,box-shadow .3s}
+.tl-item:hover .tl-dot{border-color:var(--teal);box-shadow:0 0 10px rgba(0,212,170,.4)}
+.tl-dot.now{background:var(--teal);border-color:var(--teal);box-shadow:0 0 14px rgba(0,212,170,.6)}
+.tl-header{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;margin-bottom:6px}
+.tl-role{font-size:14px;font-weight:600;color:var(--white)}
+.tl-co{font-family:var(--mono);font-size:11px;color:var(--teal);letter-spacing:.04em}
+.tl-date{font-family:var(--mono);font-size:10px;color:var(--muted);margin-left:auto}
+.tl-loc{font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:10px}
+.tl-buls{list-style:none}
+.tl-buls li{font-size:13px;color:var(--muted);line-height:1.7;padding:3px 0 3px 16px;position:relative}
+.tl-buls li::before{content:'▸';position:absolute;left:0;top:5px;color:var(--teal);font-size:9px}
+.tl-buls li strong{color:var(--text);font-weight:600}
+/* EDUCATION */
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.edu-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:22px 20px;transition:border-color .2s,transform .2s}
+.edu-card:hover{border-color:rgba(0,212,170,.3);transform:translateY(-2px)}
+.edu-deg{font-size:13px;font-weight:600;color:var(--white);margin-bottom:5px}
+.edu-inst{font-family:var(--mono);font-size:10px;color:var(--teal);margin-bottom:8px;letter-spacing:.03em}
+.edu-info{font-size:12px;color:var(--muted);line-height:1.6}
+.edu-yr{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:8px}
+/* CERTS */
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:10px}
+.cert-card{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:14px 16px;display:flex;align-items:center;gap:12px;transition:border-color .2s,transform .2s}
+.cert-card:hover{border-color:rgba(0,212,170,.3);transform:translateY(-2px)}
+.cert-ico{font-size:18px;flex-shrink:0}
+.cert-name{font-size:12px;font-weight:600;color:var(--white);margin-bottom:2px}
+.cert-from{font-family:var(--mono);font-size:10px;color:var(--muted)}
+/* AWARDS */
+.award-row{display:flex;gap:14px;flex-wrap:wrap}
+.award-card{flex:1;min-width:220px;background:var(--card);border:1px solid var(--border);border-radius:6px;padding:20px 18px;display:flex;gap:12px;align-items:flex-start;transition:border-color .2s}
+.award-card:hover{border-color:rgba(245,200,66,.3)}
+.award-card .aw-h{font-size:13px;font-weight:600;color:var(--white);margin-bottom:4px}
+.award-card .aw-b{font-size:12px;color:var(--muted);line-height:1.6}
+/* CONTACT */
+#contact{border-top:1px solid var(--border)}
+.contact-wrap{text-align:center;max-width:560px;margin:0 auto}
+.contact-wrap h2{font-family:var(--head);font-size:clamp(28px,5vw,50px);color:var(--white);margin-bottom:14px}
+.contact-wrap p{color:var(--muted);font-size:14px;line-height:1.75;margin-bottom:36px}
+.contact-links{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:36px}
+.contact-meta{font-family:var(--mono);font-size:11px;color:var(--muted);line-height:2.2;letter-spacing:.04em}
+footer{position:relative;z-index:1;text-align:center;padding:24px;font-family:var(--mono);font-size:10px;color:var(--muted);border-top:1px solid var(--border)}
+footer span{color:var(--teal)}
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-l{opacity:0;transform:translateX(-16px);transition:opacity .6s ease,transform .6s ease}
+.reveal-l.visible{opacity:1;transform:translateX(0)}
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:13px 22px}
+  nav ul li:nth-child(n+4){display:none}
+  .hero-grid{grid-template-columns:1fr}
+  .hero-terminal{display:none}
+  .wrap{padding:64px 22px}
+  #hero{padding:110px 22px 56px}
+  #impact{padding:24px 22px}
+  .skills-cols{grid-template-columns:1fr}
+  .tl-date{margin-left:0;width:100%}
+}
+</style>
+</head>
+<body>
+
+<nav id="topnav">
+  <div class="nav-logo"><em>~/</em>oscar<em>.esparza</em></div>
+  <ul>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#publications">Research</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero" style="max-width:100%;">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-tag">Open to Remote Roles · Lebanon, TN</div>
+      <h1>Oscar<br/><span class="t">Esparza</span></h1>
+      <div class="hero-sub-title">// Data Analyst · Research · Quality Control · M.Sc.</div>
+      <p class="hero-sub">Data-driven professional with 15+ years across research, quality systems, defense, and biotech. I turn complex data into clear decisions — with Python, SQL, R, and deep scientific rigor behind every insight.</p>
+      <div class="hero-langs">
+        <span class="lang-pill lp-n">🇲🇽 Spanish — Native</span>
+        <span class="lang-pill lp-p">🇺🇸 English — Full Professional</span>
+        <span class="lang-pill lp-e">🇯🇵 Japanese — Elementary</span>
+      </div>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-p">View Projects</a>
+        <a href="https://github.com/EsparzaOscar" target="_blank" class="btn btn-o">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/oscar-esparza" target="_blank" class="btn btn-o">LinkedIn ↗</a>
+        <a href="mailto:esparzacastro.oscar@gmail.com" class="btn btn-o">Email</a>
+      </div>
+    </div>
+    <div class="hero-terminal">
+      <div class="term-bar">
+        <div class="td2" style="background:#FF5F57"></div>
+        <div class="td2" style="background:#FEBC2E"></div>
+        <div class="td2" style="background:#28C840"></div>
+        <span style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-left:8px;">oscar_esparza.py</span>
+      </div>
+      <div class="term-body">
+        <div><span class="tc">import</span> <span class="tw">pandas</span> <span class="tc">as</span> <span class="tw">pd</span></div>
+        <div><span class="tc">import</span> <span class="tw">sqlalchemy, psycopg2</span></div>
+        <div>&nbsp;</div>
+        <div><span class="tm"># Nashville Air Quality 2010–2024</span></div>
+        <div><span class="tw">df</span> = pd.<span class="to">read_csv</span>(<span class="tc">'noaa_nashville.csv'</span>)</div>
+        <div><span class="tw">df</span>[<span class="tc">'pm25_7d'</span>] = (df[<span class="tc">'pm25'</span>]</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<span class="to">rolling</span>(<span class="tg">7</span>).<span class="to">mean</span>())</div>
+        <div><span class="tw">corr</span> = df[[<span class="tc">'temp'</span>,<span class="tc">'pm25'</span>,<span class="tc">'ozone'</span>]].<span class="to">corr</span>()</div>
+        <div>&nbsp;</div>
+        <div><span class="tm"># ETL → PostgreSQL star-schema</span></div>
+        <div><span class="tw">engine</span> = <span class="to">create_engine</span>(conn_str)</div>
+        <div><span class="tw">df</span>.<span class="to">to_sql</span>(<span class="tc">'fact_plays'</span>, engine,</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if_exists=<span class="tc">'append'</span>)</div>
+        <div>&nbsp;</div>
+        <div><span class="tm"># ✓ 5,110 records · 0 errors</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT BAR -->
+<div id="impact">
+  <div class="impact-row">
+    <div class="impact-item reveal"><div class="impact-num">$500K+</div><div class="impact-label">Inventory Managed</div></div>
+    <div class="impact-item reveal" style="transition-delay:.07s"><div class="impact-num">200+</div><div class="impact-label">Personnel Supported</div></div>
+    <div class="impact-item reveal" style="transition-delay:.14s"><div class="impact-num">60%</div><div class="impact-label">Processing Time Cut</div></div>
+    <div class="impact-item reveal" style="transition-delay:.21s"><div class="impact-num">50%</div><div class="impact-label">Waste Reduced</div></div>
+    <div class="impact-item reveal" style="transition-delay:.28s"><div class="impact-num">15%</div><div class="impact-label">Accuracy Gained</div></div>
+    <div class="impact-item reveal" style="transition-delay:.35s"><div class="impact-num">5</div><div class="impact-label">Publications</div></div>
+    <div class="impact-item reveal" style="transition-delay:.42s"><div class="impact-num">15+</div><div class="impact-label">Years Experience</div></div>
+    <div class="impact-item reveal" style="transition-delay:.49s"><div class="impact-num">3</div><div class="impact-label">Languages</div></div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div class="wrap" id="skills">
+  <div class="eyebrow reveal">// 01 — Toolkit</div>
+  <h2 class="sec-h reveal">Technical Skills</h2>
+  <hr class="ruled"/>
+  <div class="skills-cols">
+    <div class="reveal">
+      <div class="skgroup">Data & Analytics</div>
+      <div class="sk-row"><div class="sk-meta"><span class="sk-name">Python · Pandas · NumPy</span><span class="sk-pct">88%</span></div><div class="bar"><div class="bar-fill" data-w="88"></div></div></div>
+      <div class="sk-row"><div class="sk-meta"><span class="sk-name">SQL · PostgreSQL · SQLite</span><span class="sk-pct">85%</span></div><div class="bar"><div class="bar-fill" data-w="85"></div></div></div>
+      <div class="sk-row"><div class="sk-meta"><span class="sk-name">R & Statistical Analysis</span><span class="sk-pct">80%</span></div><div class="bar"><div class="bar-fill" data-w="80"></div></div></div>
+      <div class="sk-row"><div class="sk-meta"><span class="sk-name">ETL Pipelines & Data Wrangling</span><span class="sk-pct">87%</span></div><div class="bar"><div class="bar-fill" data-w="87"></div></div></div>
+      <div class="sk-row"><div class="sk-meta"><span class="sk-name">Data Visualization</span><span class="sk-pct">82%</span></div><div class="bar"><div class="bar-fill" data-w="82"></div></div></div>
+      <div class="sk-row"><div class="sk-meta"><span class="sk-name">SQLAlchemy · REST APIs</span><span class="sk-pct">78%</span></div><div class="bar"><div class="bar-fill" data-w="78"></div></div></div>
+      <div class="sk-row"><div class="sk-meta"><span class="sk-name">Biostatistics & Multivariate Stats</span><span class="sk-pct">82%</span></div><div class="bar"><div class="bar-fill" data-w="82"></div></div></div>
+      <div class="sk-row"><div class="sk-meta"><span class="sk-name">Data Mining & Data Governance</span><span class="sk-pct">80%</span></div><div class="bar"><div class="bar-fill" data-w="80"></div></div></div>
+    </div>
+    <div class="reveal" style="transition-delay:.12s">
+      <div class="skgroup">Domain & Operations</div>
+      <div class="sk-row"><div class="sk-meta"><span class="sk-name">Data Quality & Governance</span><span class="sk-pct">91%</span></div><div class="bar"><div class="bar-fill" data-w="91"></div></div></div>
+      <div class="sk-row"><div class="sk-meta"><span class="sk-name">Regulatory Compliance (FDA·EPA·ISO)</span><span class="sk-pct">93%</span></div><div class="bar"><div class="bar-fill" data-w="93"></div></div></div>
+      <div class="sk-row"><div class="sk-meta"><span class="sk-name">KPI Development & Reporting</span><span class="sk-pct">86%</span></div><div class="bar"><div class="bar-fill" data-w="86"></div></div></div>
+      <div class="sk-row"><div class="sk-meta"><span class="sk-name">DMAIC / Lean Six Sigma</span><span class="sk-pct">76%</span></div><div class="bar"><div class="bar-fill" data-w="76"></div></div></div>
+      <div class="sk-row"><div class="sk-meta"><span class="sk-name">Process Improvement</span><span class="sk-pct">89%</span></div><div class="bar"><div class="bar-fill" data-w="89"></div></div></div>
+      <div class="sk-row"><div class="sk-meta"><span class="sk-name">Git & GitHub</span><span class="sk-pct">75%</span></div><div class="bar"><div class="bar-fill" data-w="75"></div></div></div>
+      <div class="skgroup" style="margin-top:28px;">Core Competencies</div>
+      <div class="soft-chips">
+        <span class="soft-chip">Data Mining</span><span class="soft-chip">Root Cause Analysis</span>
+        <span class="soft-chip">SOP Development</span><span class="soft-chip">Team Leadership</span>
+        <span class="soft-chip">Training & Mentoring</span><span class="soft-chip">Technical Writing</span>
+        <span class="soft-chip">Field Research</span><span class="soft-chip">Cross-functional Collab</span>
+        <span class="soft-chip">Project Management</span><span class="soft-chip">Lab Operations</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="wrap" id="projects" style="padding-top:0">
+  <div class="eyebrow reveal">// 02 — Portfolio</div>
+  <h2 class="sec-h reveal">GitHub Projects</h2>
+  <hr class="ruled"/>
+  <div class="proj-grid">
+    <div class="proj-card reveal">
+      <div class="proj-num">PROJECT_01 · Active</div>
+      <div class="proj-title">Sparkify Play Analytics</div>
+      <div class="proj-desc">PostgreSQL star-schema database and full ETL pipeline for a music streaming startup. Transformed raw JSON user-activity logs and song metadata into optimized fact & dimension tables for behavioral queries.</div>
+      <div class="tags"><span class="tag">PostgreSQL</span><span class="tag">ETL</span><span class="tag">Star Schema</span><span class="tag">JSON</span><span class="tag py">Python</span></div>
+    </div>
+    <div class="proj-card reveal" style="transition-delay:.1s">
+      <div class="proj-num">PROJECT_02 · Active</div>
+      <div class="proj-title">Nashville Skies: Weather & Air Quality (2010–2024)</div>
+      <div class="proj-desc">Wrangled 14 years of NOAA weather and AirNow data for Nashville, TN. Explored correlations between temperature, PM2.5, PM10, and ozone levels — revealing seasonal environmental health patterns.</div>
+      <div class="tags"><span class="tag">NOAA API</span><span class="tag">AirNow</span><span class="tag py">Pandas</span><span class="tag">EDA</span><span class="tag">Visualization</span></div>
+    </div>
+    <div class="proj-card reveal" style="transition-delay:.2s">
+      <div class="proj-num">PROJECT_03 · Active</div>
+      <div class="proj-title">Weather Data API Collection — SQLAlchemy</div>
+      <div class="proj-desc">Automated pipeline using the Open-Meteo Historical API to collect 5 years of Nashville climate data. Calculates summary statistics and persists results to SQLite via SQLAlchemy ORM.</div>
+      <div class="tags"><span class="tag">SQLAlchemy</span><span class="tag">Open-Meteo</span><span class="tag">SQLite</span><span class="tag py">Python</span></div>
+    </div>
+    <div class="proj-card reveal" style="transition-delay:.3s">
+      <div class="proj-num">PROJECT_04 · In Progress</div>
+      <div class="proj-title">Data Modeling & Data Wrangling</div>
+      <div class="proj-desc">Jupyter Notebook repositories covering real-world data modeling techniques and wrangling workflows — cleaning, reshaping, and preparing messy datasets for analysis.</div>
+      <div class="tags"><span class="tag py">Jupyter</span><span class="tag py">Pandas</span><span class="tag">Data Cleaning</span><span class="tag">Modeling</span></div>
+    </div>
+    <div class="proj-card reveal" style="transition-delay:.4s">
+      <div class="proj-num">PROJECT_05 · Public</div>
+      <div class="proj-title">AI Automation Journey</div>
+      <div class="proj-desc">Public Python repository documenting experiments at the intersection of data engineering and AI automation — continuous self-directed learning in emerging toolsets.</div>
+      <div class="tags"><span class="tag py">Python</span><span class="tag">AI / ML</span><span class="tag">Automation</span><span class="tag">Open Source</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- PUBLICATIONS -->
+<div class="wrap" id="publications" style="padding-top:0">
+  <div class="eyebrow reveal">// 03 — Research</div>
+  <h2 class="sec-h reveal">Publications</h2>
+  <hr class="ruled"/>
+  <div class="pub-list">
+    <div class="pub-card reveal">
+      <div class="pub-icon">🔬</div>
+      <div>
+        <div class="pub-title">Application of Molecular Techniques for Identification and Evaluation in Marine Fish Species <span class="pub-type pt-a">Academic</span></div>
+        <div class="pub-meta">Universidad Autónoma de Baja California · Marine Biology & Genetics</div>
+      </div>
+    </div>
+    <div class="pub-card reveal" style="transition-delay:.07s">
+      <div class="pub-icon">🌊</div>
+      <div>
+        <div class="pub-title">Eco-Labeling and Sustainable Fisheries: An Alternative for Socioeconomic and Cultural Progress <span class="pub-type pt-a">Academic</span></div>
+        <div class="pub-meta">Sustainable fisheries policy · Environmental science & economics</div>
+      </div>
+    </div>
+    <div class="pub-card reveal" style="transition-delay:.14s">
+      <div class="pub-icon">🐋</div>
+      <div>
+        <div class="pub-title">Pacific Bluefin Tuna (PBT) Movement Patterns Evaluated Based on Measurements of Archival Electronic Tags <span class="pub-type pt-a">Academic</span></div>
+        <div class="pub-meta">Marine telemetry & population dynamics · California Current ecosystem</div>
+      </div>
+    </div>
+    <div class="pub-card reveal" style="transition-delay:.21s">
+      <div class="pub-icon">🐟</div>
+      <div>
+        <div class="pub-title">Studies on Interaction Between Bluefin Tuna (Thunnus orientalis) and Pacific Sardine (Sardinops sagax) in the California Current <span class="pub-type pt-a">Academic</span></div>
+        <div class="pub-meta">Predator-prey dynamics · Oceanographic modeling · California Current System</div>
+      </div>
+    </div>
+    <div class="pub-card reveal" style="transition-delay:.28s">
+      <div class="pub-icon">📖</div>
+      <div>
+        <div class="pub-title">Read, Thrive, Connect: A Comprehensive Guide to Building a Meaningful Reading Life <span class="pub-type pt-b">Book · Amazon</span></div>
+        <div class="pub-meta">Self-published · April 2023 · Available on Amazon KDP</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="wrap" id="experience" style="padding-top:0">
+  <div class="eyebrow reveal">// 04 — Experience</div>
+  <h2 class="sec-h reveal">Work History</h2>
+  <hr class="ruled"/>
+  <div class="timeline">
+
+    <div class="tl-item reveal-l">
+      <div class="tl-dot now"></div>
+      <div class="tl-header"><span class="tl-role">Sr. QC Technician</span><span class="tl-co">Thermo Fisher Scientific</span><span class="tl-date">Sep 2024 — Present · 1 yr 8 mo</span></div>
+      <div class="tl-loc">📍 Lebanon, TN</div>
+      <ul class="tl-buls">
+        <li>Quality control inspections on single-use devices ensuring <strong>FDA, ISO, cGMP & cGDP</strong> compliance.</li>
+        <li>Analyzed quality documentation to identify compliance trends; drove cross-functional corrective actions.</li>
+        <li>Led onboarding and hands-on training for new QC technicians, standardizing protocol understanding.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item reveal-l" style="transition-delay:.05s">
+      <div class="tl-dot"></div>
+      <div class="tl-header"><span class="tl-role">Scientist I — Radiochemistry</span><span class="tl-co">Pace Analytical Services</span><span class="tl-date">May 2024 — Sep 2024 · 5 mo</span></div>
+      <div class="tl-loc">📍 Mt. Juliet, TN</div>
+      <ul class="tl-buls">
+        <li>Analyzed Ra-226 isotopes in water, air, and soil samples per <strong>EPA Method 903.0</strong>.</li>
+        <li>Designed a visual waste-level monitoring system — reduced acid neutralizer consumption by <strong>50%</strong>.</li>
+        <li>Maintained calibration logs achieving 100% data reliability across all environmental monitoring cycles.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item reveal-l" style="transition-delay:.10s">
+      <div class="tl-dot"></div>
+      <div class="tl-header"><span class="tl-role">CBRN Non-Commissioned Officer</span><span class="tl-co">U.S. Army — Field Artillery Battalion</span><span class="tl-date">Oct 2021 — Feb 2024 · 2 yr 5 mo</span></div>
+      <div class="tl-loc">📍 Fort Campbell, KY</div>
+      <ul class="tl-buls">
+        <li>Appointed NCO advising and implementing CBRN defense protocols for <strong>200+ enlisted and commissioned soldiers</strong>.</li>
+        <li>Managed procurement and inventory of CBRN defense materials valued at <strong>$500,000+</strong>, ensuring 100% readiness.</li>
+        <li>Built structured KPI reporting for leadership reviews on unit readiness and training completion rates.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item reveal-l" style="transition-delay:.15s">
+      <div class="tl-dot"></div>
+      <div class="tl-header"><span class="tl-role">Self Publisher</span><span class="tl-co">Amazon KDP</span><span class="tl-date">Apr 2020 — Feb 2024</span></div>
+      <div class="tl-loc">📍 Remote</div>
+      <ul class="tl-buls">
+        <li>Authored and published <em>"Read, Thrive, Connect"</em> (April 2023) — available on Amazon.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item reveal-l" style="transition-delay:.20s">
+      <div class="tl-dot"></div>
+      <div class="tl-header"><span class="tl-role">Research Associate II → Research Associate → Lab Technician</span><span class="tl-co">Viridos (Algae Biotech)</span><span class="tl-date">Aug 2020 — Oct 2021 · 1 yr 3 mo</span></div>
+      <div class="tl-loc">📍 Calipatria, CA</div>
+      <ul class="tl-buls">
+        <li>Innovated biomass analytical methods improving measurement accuracy by <strong>15%</strong> — adopted as official alternate standard.</li>
+        <li>Designed OD/PAM measurement workflow reducing processing time by <strong>60%</strong>.</li>
+        <li>Mentored 3+ Lab Technicians; conducted hiring interviews for Research Associate candidates.</li>
+        <li>Nutrient dosage calculations leading to <strong>4% biomass yield gains</strong>.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item reveal-l" style="transition-delay:.25s">
+      <div class="tl-dot"></div>
+      <div class="tl-header"><span class="tl-role">Operations Supervisor</span><span class="tl-co">Claro Pools</span><span class="tl-date">Aug 2018 — Aug 2019 · 1 yr 1 mo</span></div>
+      <div class="tl-loc">📍 Palm Desert, CA</div>
+      <ul class="tl-buls">
+        <li>Directed <strong>20+ technicians</strong> in daily maintenance, chemical treatment, and safety inspections across commercial and residential pools.</li>
+        <li>Oversaw scheduling and resource allocation, increasing client satisfaction and retention.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item reveal-l" style="transition-delay:.30s">
+      <div class="tl-dot"></div>
+      <div class="tl-header"><span class="tl-role">Certified Pool/Spa Operator</span><span class="tl-co">ASP — America's Swimming Pool Company</span><span class="tl-date">Jul 2017 — Aug 2018 · 1 yr 2 mo</span></div>
+      <div class="tl-loc">📍 El Paso, TX</div>
+      <ul class="tl-buls">
+        <li>Optimized service workflows achieving a <strong>10% reduction in per-client service time</strong>.</li>
+        <li>Conducted water quality tests ensuring federal/state regulatory compliance.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item reveal-l" style="transition-delay:.35s">
+      <div class="tl-dot"></div>
+      <div class="tl-header"><span class="tl-role">Science Teacher</span><span class="tl-co">Universidad del Valle de México</span><span class="tl-date">Feb 2016 — Feb 2017 · 1 yr 1 mo</span></div>
+      <div class="tl-loc">📍 Mexicali, Mexico</div>
+      <ul class="tl-buls">
+        <li>Taught Chemistry, Biology, Geography, and Ecology — achieving <strong>15% gains</strong> in student engagement and comprehension.</li>
+        <li>Spearheaded the annual high school science fair, coordinating teachers, students, and external contributors.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item reveal-l" style="transition-delay:.40s">
+      <div class="tl-dot"></div>
+      <div class="tl-header"><span class="tl-role">Research Technician</span><span class="tl-co">Presidio Graduate School — Olazul Non-Profit</span><span class="tl-date">Oct 2014 — Feb 2015 · 5 mo</span></div>
+      <div class="tl-loc">📍 Ensenada, Mexico · Marine Conservation</div>
+      <ul class="tl-buls">
+        <li>Field research identifying viable seaweed cultivation sites along South Baja California coast.</li>
+        <li>Analyzed culture protocols with a multidisciplinary team — improved feasibility of edible seaweed cultivation.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item reveal-l" style="transition-delay:.45s">
+      <div class="tl-dot"></div>
+      <div class="tl-header"><span class="tl-role">Research Assistant / Researcher</span><span class="tl-co">Universidad Autónoma de Baja California</span><span class="tl-date">Feb 2007 — Dec 2010 · 3 yr 11 mo</span></div>
+      <div class="tl-loc">📍 Ensenada, Mexico</div>
+      <ul class="tl-buls">
+        <li>Photosynthesis bio-assays on commercially valuable brown algae using spectrophotometers and fluorometers.</li>
+        <li>Proximate analysis (proteins, lipids, carbohydrates) on seaweed samples; contributed to peer-reviewed publications.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item reveal-l" style="transition-delay:.50s">
+      <div class="tl-dot"></div>
+      <div class="tl-header"><span class="tl-role">IT Support Specialist</span><span class="tl-co">Telvista</span><span class="tl-date">Aug 2006 — Dec 2006 · 5 mo</span></div>
+      <div class="tl-loc">📍 Mexicali, Mexico</div>
+      <ul class="tl-buls">
+        <li>Achieved top monthly metrics: <strong>10% reduction in call duration</strong>, <strong>90% customer satisfaction</strong> rating.</li>
+        <li>Resolved computer and database system issues, improving first-call resolution rates.</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- EDUCATION -->
+<div class="wrap" id="education" style="padding-top:0">
+  <div class="eyebrow reveal">// 05 — Education</div>
+  <h2 class="sec-h reveal">Academic Background</h2>
+  <hr class="ruled"/>
+  <div class="edu-grid">
+    <div class="edu-card reveal">
+      <div class="edu-deg">B.S. — Data Analytics</div>
+      <div class="edu-inst">Western Governors University</div>
+      <div class="edu-info">Data Management · Data Analytics · Change Management · Applied Probability & Statistics</div>
+      <div class="edu-yr">Murray, UT · Jan 2024</div>
+    </div>
+    <div class="edu-card reveal" style="transition-delay:.08s">
+      <div class="edu-deg">M.S. — Marine Ecology</div>
+      <div class="edu-inst">CICESE — Ensenada Center for Scientific Research</div>
+      <div class="edu-info">Biostatistics I & II · Multivariate Statistics · Computational Methods</div>
+      <div class="edu-yr">Ensenada, Mexico · Honorific Mention 🏅</div>
+    </div>
+    <div class="edu-card reveal" style="transition-delay:.16s">
+      <div class="edu-deg">B.S. — Biotechnology</div>
+      <div class="edu-inst">Autonomous University of Baja California</div>
+      <div class="edu-info">Biochemistry · Physiology · Statistics · Molecular Techniques</div>
+      <div class="edu-yr">Ensenada, Mexico</div>
+    </div>
+    <div class="edu-card reveal" style="transition-delay:.24s">
+      <div class="edu-deg">Workshop — Metagenomics & Genomic Sequence Analysis</div>
+      <div class="edu-inst">San Diego State University</div>
+      <div class="edu-info">Bioinformatics · Genomic data pipelines</div>
+      <div class="edu-yr">San Diego, CA</div>
+    </div>
+  </div>
+
+  <br/><br/>
+  <div class="eyebrow reveal" style="margin-bottom:20px;">// Certifications & Training</div>
+  <div class="certs-grid">
+    <div class="cert-card reveal"><div class="cert-ico">📊</div><div><div class="cert-name">Google Data Analytics</div><div class="cert-from">Coursera · Python · R · SQL · Viz</div></div></div>
+    <div class="cert-card reveal" style="transition-delay:.06s"><div class="cert-ico">⚙️</div><div><div class="cert-name">Lean Six Sigma Green Belt</div><div class="cert-from">CETYS University · DMAIC · Lean</div></div></div>
+    <div class="cert-card reveal" style="transition-delay:.12s"><div class="cert-ico">📋</div><div><div class="cert-name">PMP Certification Training</div><div class="cert-from">IVMF · Agile · Risk Management</div></div></div>
+    <div class="cert-card reveal" style="transition-delay:.18s"><div class="cert-ico">🛡️</div><div><div class="cert-name">HAZWOPER 40-HR</div><div class="cert-from">360-Training · OSHA · EPA</div></div></div>
+    <div class="cert-card reveal" style="transition-delay:.24s"><div class="cert-ico">📓</div><div><div class="cert-name">Introduction to Jupyter</div><div class="cert-from">Certified · Notebooks & Python</div></div></div>
+    <div class="cert-card reveal" style="transition-delay:.30s"><div class="cert-ico">📈</div><div><div class="cert-name">Statistics</div><div class="cert-from">Certified applied statistics training</div></div></div>
+    <div class="cert-card reveal" style="transition-delay:.36s"><div class="cert-ico">🧠</div><div><div class="cert-name">Learning How to Learn — With Honors</div><div class="cert-from">Coursera · Meta-cognition</div></div></div>
+    <div class="cert-card reveal" style="transition-delay:.42s"><div class="cert-ico">☢️</div><div><div class="cert-name">Hazmat Operations — PPE</div><div class="cert-from">U.S. Army · Fort Campbell, KY</div></div></div>
+  </div>
+
+  <br/><br/>
+  <div class="eyebrow reveal" style="margin-bottom:20px;">// Honors & Recognition</div>
+  <div class="award-row">
+    <div class="award-card reveal">
+      <div style="font-size:24px">🏅</div>
+      <div><div class="aw-h">Honorific Mention — Graduate Studies</div><div class="aw-b">Academic distinction for outstanding scholarly achievement during M.Sc. studies at CICESE.</div></div>
+    </div>
+    <div class="award-card reveal" style="transition-delay:.1s">
+      <div style="font-size:24px">📚</div>
+      <div><div class="aw-h">Published Author — Amazon KDP</div><div class="aw-b"><em>Read, Thrive, Connect</em> — self-published April 2023. Available on Amazon.</div></div>
+    </div>
+    <div class="award-card reveal" style="transition-delay:.2s">
+      <div style="font-size:24px">⚡</div>
+      <div><div class="aw-h">U.S. Army Veteran</div><div class="aw-b">Honorably served as appointed NCO managing $500K+ in assets for 200+ military personnel.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="wrap" id="contact">
+  <div class="contact-wrap">
+    <div class="eyebrow" style="margin-bottom:14px">// 06 — Let's Connect</div>
+    <h2>Ready to<br/><span style="color:var(--teal)">analyze together.</span></h2>
+    <p>Open to remote Data Analyst roles. I bring scientific rigor, regulatory experience, and active portfolio work in Python & SQL — ready to contribute from day one.</p>
+    <div class="contact-links">
+      <a href="mailto:esparzacastro.oscar@gmail.com" class="btn btn-p">Email Me</a>
+      <a href="https://www.linkedin.com/in/oscar-esparza" target="_blank" class="btn btn-o">LinkedIn ↗</a>
+      <a href="https://github.com/EsparzaOscar" target="_blank" class="btn btn-o">GitHub ↗</a>
+    </div>
+    <div class="contact-meta">
+      (442) 238-5036<br/>
+      Lebanon, TN · Open to Remote<br/>
+      esparzacastro.oscar@gmail.com
+    </div>
+  </div>
+</div>
+
+<footer>Built by <span>~/oscar.esparza</span> &nbsp;·&nbsp; Data Analyst · M.Sc. · US Army Veteran &nbsp;·&nbsp; 2025</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.bar-fill').forEach(b => { b.style.width = b.dataset.w + '%'; });
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal,.reveal-l,.tl-item').forEach(el => io.observe(el));
+setTimeout(() => {
+  document.querySelectorAll('.bar-fill').forEach(b => {
+    if (b.getBoundingClientRect().top < window.innerHeight) b.style.width = b.dataset.w + '%';
+  });
+}, 700);
+const secs = document.querySelectorAll('[id]');
+const lks = document.querySelectorAll('nav ul a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  secs.forEach(s => { if (window.scrollY >= s.offsetTop - 160) cur = s.id; });
+  lks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + cur); });
+  document.getElementById('topnav').style.padding = window.scrollY > 60 ? '10px 52px' : '16px 52px';
+}, { passive: true });
+</script>
+</body>
+</html>
